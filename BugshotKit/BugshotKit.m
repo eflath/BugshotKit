@@ -9,10 +9,6 @@
 #import "MABGTimer.h"
 @import CoreText;
 
-@interface UIViewController ()
-- (void)attentionClassDumpUser:(id)fp8 yesItsUsAgain:(id)fp12 althoughSwizzlingAndOverridingPrivateMethodsIsFun:(id)fp16 itWasntMuchFunWhenYourAppStoppedWorking:(id)fp20 pleaseRefrainFromDoingSoInTheFutureOkayThanksBye:(id)fp24;
-@end
-
 NSString * const BSKNewLogMessageNotification = @"BSKNewLogMessageNotification";
 
 UIImage *BSKImageWithDrawing(CGSize size, void (^drawingCommands)())
@@ -118,24 +114,24 @@ UIImage *BSKImageWithDrawing(CGSize size, void (^drawingCommands)())
     dispatch_once(&onceToken, ^{
         consoleFontName = nil;
 
-        NSData *inData = [NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]].resourcePath stringByAppendingPathComponent:@"Inconsolata.otf"]];
-        if (inData) {
-            CFErrorRef error;
-            CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)inData);
-            CGFontRef font = CGFontCreateWithDataProvider(provider);
-            if (CTFontManagerRegisterGraphicsFont(font, &error)) {
-                if ([UIFont fontWithName:@"Inconsolata" size:size]) consoleFontName = @"Inconsolata";
-                else NSLog(@"[BugshotKit] failed to instantiate console font");
-            } else {
-                CFStringRef errorDescription = CFErrorCopyDescription(error);
-                NSLog(@"[BugshotKit] failed to load console font: %@", errorDescription);
-                CFRelease(errorDescription);
-            }
-            CFRelease(font);
-            CFRelease(provider);
-        } else {
-            NSLog(@"[BugshotKit] Console font not found. Please add Inconsolata.otf to your Resources.");        
-        }
+//        NSData *inData = [NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]].resourcePath stringByAppendingPathComponent:@"Inconsolata.otf"]];
+//        if (inData) {
+//            CFErrorRef error;
+//            CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)inData);
+//            CGFontRef font = CGFontCreateWithDataProvider(provider);
+//            if (CTFontManagerRegisterGraphicsFont(font, &error)) {
+//                if ([UIFont fontWithName:@"Inconsolata" size:size]) consoleFontName = @"Inconsolata";
+//                else NSLog(@"[BugshotKit] failed to instantiate console font");
+//            } else {
+//                CFStringRef errorDescription = CFErrorCopyDescription(error);
+//                NSLog(@"[BugshotKit] failed to load console font: %@", errorDescription);
+//                CFRelease(errorDescription);
+//            }
+//            CFRelease(font);
+//            CFRelease(provider);
+//        } else {
+//            NSLog(@"[BugshotKit] Console font not found. Please add Inconsolata.otf to your Resources.");        
+//        }
 
         if (! consoleFontName) consoleFontName = @"CourierNewPSMT";
     });
@@ -146,12 +142,12 @@ UIImage *BSKImageWithDrawing(CGSize size, void (^drawingCommands)())
 - (instancetype)init
 {
     if ( (self = [super init]) ) {
-        if ([self.class isProbablyAppStoreBuild]) {
-            self.isDisabled = YES;
-            NSLog(@"[BugshotKit] App Store build detected. BugshotKit is disabled.");
-            return self;
-        }
-        
+//        if ([self.class isProbablyAppStoreBuild]) {
+//            self.isDisabled = YES;
+//            NSLog(@"[BugshotKit] App Store build detected. BugshotKit is disabled.");
+//            return self;
+//        }
+
         self.windowsWithGesturesAttached = [NSMapTable weakToWeakObjectsMapTable];
         
         self.annotationFillColor = [UIColor colorWithRed:1.0f green:0.2196f blue:0.03922f alpha:1.0f]; // Bugshot red-orange
